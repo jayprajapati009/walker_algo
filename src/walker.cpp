@@ -63,7 +63,7 @@ class Walker : public rclcpp::Node {
    *
    * @param scanData
    */
-  void laserData_callback(const LASER_SCAN &scanData) {
+  void laserData_callback(const LASER_SCAN& scanData) {
     if (scanData.header.stamp.sec == 0) {
       return;
     }
@@ -98,7 +98,7 @@ class Walker : public rclcpp::Node {
   LASER_SCAN last_scan_data;
 };
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
   rclcpp::init(argc, argv);
   rclcpp::spin(std::make_shared<Walker>());
   rclcpp::shutdown();
