@@ -37,9 +37,17 @@ using namespace std::chrono_literals;
 using LASER_SCAN = sensor_msgs::msg::LaserScan;
 using TWIST = geometry_msgs::msg::Twist;
 
+/**
+ * @brief class stub that initiates the walker node. In addition gets the laser scan data and declares the methods to moce the robot accordingly.
+ *
+ */
 class Walker : public rclcpp::Node
 {
 public:
+    /**
+     * @brief Construct a new Walker object
+     *
+     */
     Walker() : Node("walker")
     {
         auto callback = std::bind(&Walker::laserData_callback, this, _1);
@@ -48,6 +56,11 @@ public:
     }
 
 private:
+    /**
+     * @brief Gets the lasre scan data
+     *
+     * @param scanData
+     */
     void laserData_callback(const LASER_SCAN &scanData)
     {
         if (scanData.header.stamp.sec == 0)
@@ -69,6 +82,12 @@ private:
         }
     }
 
+    /**
+     * @brief gives the commands to move the robot as per the laser scan data
+     *
+     * @param x_velocity
+     * @param z_velocity
+     */
     void move_robot(float x_velocity, float z_velocity)
     {
         auto velocity_msg = TWIST();
@@ -77,6 +96,7 @@ private:
         publish_velocity->publish(velocity_msg);
     }
 
+    // Declaring the private variables
     rclcpp::Subscription<LASER_SCAN>::SharedPtr laser_data_sub;
     rclcpp::Publisher<TWIST>::SharedPtr publish_velocity;
     rclcpp::TimerBase::SharedPtr timer;
