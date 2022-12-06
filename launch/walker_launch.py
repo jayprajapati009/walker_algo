@@ -40,9 +40,7 @@ def generate_launch_description():
 
         ExecuteProcess(
             condition=IfCondition(bag_record),
-            cmd=[
-                'd ../results/bag_files', '&&', 'ros2', 'bag', 'record', '-a', '-x "/camera.+"'
-            ],
+            cmd=['ros2', 'bag', 'record', '-a', '-x /camera.+'],
             shell=True
         )
 
