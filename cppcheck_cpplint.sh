@@ -1,0 +1,2 @@
+cppcheck --enable=all --std=c++17 ./src/*.cpp ./include/turtlebot3_walker/*.hpp --suppress=missingIncludeSystem --suppress=unmatchedSuppression --suppress=unusedFunction --suppress=missingInclude --suppress=useInitializationList > results/cppcheck.txt
+cpplint --filter=-build/c++11,+build/c++17,-build/namespaces,-build/include_order ./src/*.cpp ./include/turtlebot3_walker/*.hpp > ./results/cpplint.txt
